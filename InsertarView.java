@@ -14,7 +14,7 @@ public class InsertarView extends JFrame {
         setLocationRelativeTo(null);
 
         // Ruta absoluta de la imagen
-        String rutaImagen = "src/Imagen/fondo.jpg";
+        String rutaImagen = "imagen/fondo.jpeg";
 
         // Verificar que la imagen existe
         if (!new File(rutaImagen).exists()) {
