@@ -14,7 +14,7 @@ public class EliminarView extends JFrame {
         setLocationRelativeTo(null);
 
         // Ruta de la imagen de fondo
-        String rutaImagen = "src/imagen/fondo.jpg";
+        String rutaImagen = "imagen/fondo.jpg";
 
         // Verificar que la imagen existe
         File archivoImagen = new File(rutaImagen);
