@@ -14,7 +14,7 @@ public class MenuPrincipalConFondo extends JFrame {
         setLocationRelativeTo(null);
 
         // Ruta absoluta de la imagen
-        String rutaImagen = "C:\\\\Users\\\\PC\\\\Documents\\\\Bases de DAtos\\\\Examen2FBD\\\\GUIExamen2\\\\src\\\\Imagenes\\\\FondoPrincipal.jpg";
+        String rutaImagen = "imagen/fondo.jpeg";
 
         // Verificar que la imagen existe
         if (!new File(rutaImagen).exists()) {
