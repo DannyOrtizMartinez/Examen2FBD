@@ -4,18 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-public class ConsultarView extends JFrame {
+public class ActualizarVista extends JFrame {
 
-    public ConsultarView() {
+    public ActualizarVista() {
 
         // Configuración de la ventana principal
-        setTitle("Formulario de Consulta");
+        setTitle("Formulario de Actualización de Nombres");
         setSize(800, 600); // Tamaño ajustado
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Cerrar solo esta ventana
         setLocationRelativeTo(null);
 
         // Cambiar color de fondo
-        getContentPane().setBackground(new Color(245, 245, 220)); // Color beige claro
+        getContentPane().setBackground(new Color(245, 245, 220)); // beige claro
 
         // Configuración del layout principal
         JPanel panelPrincipal = new JPanel(new GridBagLayout());
@@ -28,7 +28,7 @@ public class ConsultarView extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Crear título estilizado
-        JLabel titulo = new JLabel("CONSULTA DE REGISTROS");
+        JLabel titulo = new JLabel("ACTUALIZACIÓN DE USUARIOS");
         titulo.setFont(new Font("Roboto", Font.BOLD, 28));
         titulo.setForeground(new Color(105, 105, 105)); // Gris oscuro
         gbc.gridx = 0;
@@ -37,18 +37,31 @@ public class ConsultarView extends JFrame {
         gbc.anchor = GridBagConstraints.WEST; // Alinear a la izquierda
         panelPrincipal.add(titulo, gbc);
 
-        // Crear etiqueta y campo de texto para buscar
+        // Crea etiquetas y campos de texto
         JLabel labelBuscar = crearEtiqueta("Buscar por ID:");
-        JTextField txtBuscar = crearCampoTexto("Ingrese el ID del registro que desea consultar.");
-
-        // Botón de búsqueda
+        JTextField txtBuscar = crearCampoTexto("Ingrese el ID del registro que desea actualizar.");
         JButton btnBuscar = crearBoton("Buscar", "Haga clic para buscar el registro.", "imagen/lupa.png",
                 new Color(100, 149, 237), Color.WHITE); // Azul claro
 
-        JTextArea areaResultados = new JTextArea(10, 30);
-        areaResultados.setEditable(false);
-        areaResultados.setFont(new Font("Monospaced", Font.PLAIN, 14));
-        JScrollPane scrollResultados = new JScrollPane(areaResultados);
+        JLabel labelPrimerNombre = crearEtiqueta("Primer Nombre:");
+        JTextField txtPrimerNombre = crearCampoTexto("Ingrese el nuevo primer nombre.");
+
+        JLabel labelSegundoNombre = crearEtiqueta("Segundo Nombre:");
+        JTextField txtSegundoNombre = crearCampoTexto("Ingrese el nuevo segundo nombre (opcional).");
+
+        JLabel labelPrimerApellido = crearEtiqueta("Primer Apellido:");
+        JTextField txtPrimerApellido = crearCampoTexto("Ingrese el nuevo primer apellido.");
+
+        JLabel labelSegundoApellido = crearEtiqueta("Segundo Apellido:");
+        JTextField txtSegundoApellido = crearCampoTexto("Ingrese el nuevo segundo apellido (opcional).");
+
+        // Crear botón de actualización
+        JButton btnActualizar = crearBoton("Actualizar", "Haga clic para actualizar los datos.", "imagen/lapiz2.png",
+                new Color(60, 179, 113), Color.WHITE); // Verde
+
+        // Crear botón regresar
+        JButton btnRegresar = crearBoton("Regresar", "Regresa al menú principal.", "imagen/salir.png",
+                new Color(255, 69, 0), Color.WHITE); // Naranja
 
         // Acción para el botón "Buscar"
         btnBuscar.addActionListener(e -> {
@@ -58,13 +71,27 @@ public class ConsultarView extends JFrame {
                         JOptionPane.ERROR_MESSAGE);
             } else {
                 // Lógica para buscar datos
-                areaResultados.setText("Resultado de la búsqueda para el ID: " + id + "\n\nSimulación de datos...");
+                JOptionPane.showMessageDialog(this, "Datos encontrados para ID: " + id, "Búsqueda exitosa",
+                        JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
-        // Crear botón regresar
-        JButton btnRegresar = crearBoton("Regresar", "Regresa al menú principal.", "imagen/salir.png",
-                new Color(255, 69, 0), Color.WHITE); // Naranja
+        // Acción para el botón "Actualizar"
+        btnActualizar.addActionListener(e -> {
+            if (txtPrimerNombre.getText().isEmpty() || txtPrimerApellido.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Los campos de primer nombre y primer apellido son obligatorios.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Lógica de actualización
+                String mensaje = String.format(
+                        "Datos actualizados:\nPrimer Nombre: %s\nSegundo Nombre: %s\nPrimer Apellido: %s\nSegundo Apellido: %s",
+                        txtPrimerNombre.getText(),
+                        txtSegundoNombre.getText(),
+                        txtPrimerApellido.getText(),
+                        txtSegundoApellido.getText());
+                JOptionPane.showMessageDialog(this, mensaje, "Actualización Exitosa", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
 
         // Acción para el botón "Regresar"
         btnRegresar.addActionListener(e -> {
@@ -85,21 +112,41 @@ public class ConsultarView extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 2;
-        gbc.gridwidth = 3;
-        gbc.fill = GridBagConstraints.BOTH;
-        panelPrincipal.add(scrollResultados, gbc);
+        panelPrincipal.add(labelPrimerNombre, gbc);
+        gbc.gridx = 1;
+        panelPrincipal.add(txtPrimerNombre, gbc);
 
+        gbc.gridx = 0;
         gbc.gridy = 3;
-        gbc.gridwidth = 1;
-        gbc.fill = GridBagConstraints.NONE;
+        panelPrincipal.add(labelSegundoNombre, gbc);
+        gbc.gridx = 1;
+        panelPrincipal.add(txtSegundoNombre, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        panelPrincipal.add(labelPrimerApellido, gbc);
+        gbc.gridx = 1;
+        panelPrincipal.add(txtPrimerApellido, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        panelPrincipal.add(labelSegundoApellido, gbc);
+        gbc.gridx = 1;
+        panelPrincipal.add(txtSegundoApellido, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 6;
         gbc.anchor = GridBagConstraints.CENTER;
+        panelPrincipal.add(btnActualizar, gbc);
+
+        gbc.gridy = 7;
         panelPrincipal.add(btnRegresar, gbc);
 
-        // Mostrar la ventana
+        // Mostrar ventana
         setVisible(true);
     }
 
-    // Método para crear etiquetas estilizadas
+    // Método para crear etiquetas
     private JLabel crearEtiqueta(String texto) {
         JLabel etiqueta = new JLabel(texto);
         etiqueta.setForeground(new Color(105, 105, 105)); // Gris oscuro

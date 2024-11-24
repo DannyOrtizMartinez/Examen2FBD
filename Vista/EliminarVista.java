@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-public class ConsultarView extends JFrame {
+public class EliminarVista extends JFrame {
 
-    public ConsultarView() {
+    public EliminarVista() {
 
         // Configuración de la ventana principal
-        setTitle("Formulario de Consulta");
+        setTitle("Eliminar Usuario");
         setSize(800, 600); // Tamaño ajustado
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Cerrar solo esta ventana
         setLocationRelativeTo(null);
@@ -22,49 +22,45 @@ public class ConsultarView extends JFrame {
         panelPrincipal.setOpaque(false);
         add(panelPrincipal);
 
-        // Configuración de layout y restricciones
+        // Configuración del layout y restricciones
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Crear título estilizado
-        JLabel titulo = new JLabel("CONSULTA DE REGISTROS");
+        JLabel titulo = new JLabel("ELIMINACIÓN DE USUARIO");
         titulo.setFont(new Font("Roboto", Font.BOLD, 28));
         titulo.setForeground(new Color(105, 105, 105)); // Gris oscuro
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 3;
+        gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.WEST; // Alinear a la izquierda
         panelPrincipal.add(titulo, gbc);
 
-        // Crear etiqueta y campo de texto para buscar
-        JLabel labelBuscar = crearEtiqueta("Buscar por ID:");
-        JTextField txtBuscar = crearCampoTexto("Ingrese el ID del registro que desea consultar.");
+        // Etiqueta y campo de texto para el ID del usuario
+        JLabel labelIdUsuario = crearEtiqueta("ID del Usuario:");
+        JTextField txtIdUsuario = crearCampoTexto("Ingrese el ID del usuario que desea eliminar.");
 
-        // Botón de búsqueda
-        JButton btnBuscar = crearBoton("Buscar", "Haga clic para buscar el registro.", "imagen/lupa.png",
-                new Color(100, 149, 237), Color.WHITE); // Azul claro
+        // Botón de eliminar
+        JButton btnEliminar = crearBoton("Eliminar", "Haga clic para eliminar el usuario.", "imagen/eliminarIcon.png",
+                new Color(220, 53, 69), Color.WHITE); // Rojo para resaltar la acción
 
-        JTextArea areaResultados = new JTextArea(10, 30);
-        areaResultados.setEditable(false);
-        areaResultados.setFont(new Font("Monospaced", Font.PLAIN, 14));
-        JScrollPane scrollResultados = new JScrollPane(areaResultados);
-
-        // Acción para el botón "Buscar"
-        btnBuscar.addActionListener(e -> {
-            String id = txtBuscar.getText();
-            if (id.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Debe ingresar un ID para buscar.", "Error",
+        // Acción para el botón "Eliminar"
+        btnEliminar.addActionListener(e -> {
+            String idUsuario = txtIdUsuario.getText().trim();
+            if (idUsuario.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese el ID del usuario.", "Error",
                         JOptionPane.ERROR_MESSAGE);
             } else {
-                // Lógica para buscar datos
-                areaResultados.setText("Resultado de la búsqueda para el ID: " + id + "\n\nSimulación de datos...");
+                // Lógica de eliminación (simulada)
+                JOptionPane.showMessageDialog(this, "Usuario con ID " + idUsuario + " eliminado exitosamente.",
+                        "Operación Exitosa", JOptionPane.INFORMATION_MESSAGE);
             }
         });
 
-        // Crear botón regresar
+        // Botón regresar
         JButton btnRegresar = crearBoton("Regresar", "Regresa al menú principal.", "imagen/salir.png",
-                new Color(255, 69, 0), Color.WHITE); // Naranja
+                new Color(255, 165, 0), Color.WHITE); // Naranja
 
         // Acción para el botón "Regresar"
         btnRegresar.addActionListener(e -> {
@@ -77,22 +73,17 @@ public class ConsultarView extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        panelPrincipal.add(labelBuscar, gbc);
+        panelPrincipal.add(labelIdUsuario, gbc);
         gbc.gridx = 1;
-        panelPrincipal.add(txtBuscar, gbc);
-        gbc.gridx = 2;
-        panelPrincipal.add(btnBuscar, gbc);
+        panelPrincipal.add(txtIdUsuario, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 2;
-        gbc.gridwidth = 3;
-        gbc.fill = GridBagConstraints.BOTH;
-        panelPrincipal.add(scrollResultados, gbc);
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panelPrincipal.add(btnEliminar, gbc);
 
         gbc.gridy = 3;
-        gbc.gridwidth = 1;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.anchor = GridBagConstraints.CENTER;
         panelPrincipal.add(btnRegresar, gbc);
 
         // Mostrar la ventana

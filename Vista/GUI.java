@@ -8,51 +8,53 @@ public class GUI extends JFrame {
 
     public GUI() {
 
-        // Ruta absoluta de la imagen
-        String rutaImagen = "imagen/fondo.jpeg";
+        // Ruta de la imagen de fondo
+        String rutaImagen = "imagen/fondo2.jpg";
 
-        // Verificar que la imagen existe
+        // Verifica que la imagen existe
         if (!new File(rutaImagen).exists()) {
             JOptionPane.showMessageDialog(this, "No se encontró la imagen en la ruta especificada:\n" + rutaImagen,
                     "Error de carga", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
 
+        // Creamos el panel de fondo
         FondoPanel panelFondo = new FondoPanel(rutaImagen);
-        panelFondo.setLayout(new BorderLayout()); // Layout para organizar componentes
+        panelFondo.setLayout(new BorderLayout());
         add(panelFondo);
 
-        // Panel superior con título
+        // Panel superior con el título
         JPanel panelTitulo = new JPanel();
-        panelTitulo.setOpaque(false); // Para que el fondo sea visible
+        panelTitulo.setOpaque(false);
+        panelTitulo.setBorder(BorderFactory.createEmptyBorder(30, 0, 10, 0));
         JLabel etiquetaTitulo = new JLabel("MENÚ PRINCIPAL");
-        etiquetaTitulo.setForeground(Color.WHITE);
-        etiquetaTitulo.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        etiquetaTitulo.setForeground(Color.GRAY);
+        etiquetaTitulo.setFont(new Font("Roboto", Font.BOLD, 36));
         panelTitulo.add(etiquetaTitulo);
         panelFondo.add(panelTitulo, BorderLayout.NORTH);
 
-        // Panel central con botones
-        JPanel panelBotones = new JPanel(new GridLayout(5, 1, 15, 20));
-        panelBotones.setOpaque(false); // Hacer el panel transparente
-        panelBotones.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
+        // Panel central con los botones
+        JPanel panelBotones = new JPanel(new GridLayout(5, 1, 10, 10));
+        panelBotones.setOpaque(false);
+        panelBotones.setBorder(BorderFactory.createEmptyBorder(10, 250, 50, 250));
 
-        // Crear botones estilizados
-        JButton btnIngresar = crearBoton("Ingresar", "Registra nuevos datos en el sistema.");
-        JButton btnConsultar = crearBoton("Consultar", "Consulta los datos existentes.");
-        JButton btnActualizar = crearBoton("Actualizar", "Actualiza los datos en el sistema.");
-        JButton btnEliminar = crearBoton("Eliminar", "Elimina datos del sistema.");
-        JButton btnSalir = crearBoton("Salir", "Cierra la aplicación.");
+        // Creación botones con íconos
+        JButton btnIngresar = crearBoton("INSERTAR", "Registra nuevos datos en el sistema.", new Color(153, 102, 255),
+                "imagen/insertar2.png");
+        JButton btnConsultar = crearBoton("CONSULTAR", "Consulta los datos existentes.", new Color(255, 153, 102),
+                "imagen/lupa.png");
+        JButton btnActualizar = crearBoton("ACTUALIZAR", "Actualiza los datos en el sistema.", new Color(255, 204, 102),
+                "imagen/lapiz2.png");
+        JButton btnEliminar = crearBoton("ELIMINAR", "Elimina datos del sistema.", new Color(255, 102, 102),
+                "imagen/eliminarIcon.png");
+        JButton btnSalir = crearBoton("SALIR", "Cierra la aplicación.", new Color(102, 178, 255), "imagen/salir.png");
 
-        // Agregar botones al panel
-        panelBotones.add(btnIngresar);
-        panelBotones.add(btnConsultar);
-        panelBotones.add(btnActualizar);
-        panelBotones.add(btnEliminar);
-        panelBotones.add(btnSalir);
+        // Agrega acciones a los botones
+        btnIngresar.addActionListener(e -> abrirVista(new InsertarVista()));
+        btnConsultar.addActionListener(e -> abrirVista(new ConsultarView()));
+        btnActualizar.addActionListener(e -> abrirVista(new ActualizarVista()));
+        btnEliminar.addActionListener(e -> abrirVista(new EliminarVista()));
 
-        panelFondo.add(panelBotones, BorderLayout.CENTER);
-
-        // Acción para el botón "Salir"
         btnSalir.addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea salir?", "Salir",
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -61,72 +63,55 @@ public class GUI extends JFrame {
             }
         });
 
-        // Mostrar la ventana
-        setVisible(true);
+        // Agrega los botones al panel
+        panelBotones.add(btnIngresar);
+        panelBotones.add(btnConsultar);
+        panelBotones.add(btnActualizar);
+        panelBotones.add(btnEliminar);
+        panelBotones.add(btnSalir);
 
-        // Acción para el botón "Ingresar"
-        btnIngresar.addActionListener(e -> {
-            InsertarView in = new InsertarView();
-        });
-
-        // Mostrar la ventana
-        setVisible(true);
-
-        // Acción para el botón "Ingresar"
-        btnEliminar.addActionListener(e -> {
-            EliminarView eliminar = new EliminarView();
-        });
-
-        // Mostrar la ventana
-        setVisible(true);
-
-        // Acción para el botón "Ingresar"
-        btnActualizar.addActionListener(e -> {
-            ActualizarView actualizar = new ActualizarView();
-        });
-
-        // Mostrar la ventana
-        setVisible(true);
-
-        // Acción para el botón "Ingresar"
-        btnConsultar.addActionListener(e -> {
-            ConsultarView consultar = new ConsultarView();
-        });
+        panelFondo.add(panelBotones, BorderLayout.CENTER);
 
         // Mostrar la ventana
         setVisible(true);
     }
 
-    // Método para crear botones estilizados con opacidad
-    private JButton crearBoton(String texto, String tooltip) {
+    // Crea botones con diferentes estilos
+    private JButton crearBoton(String texto, String tooltip, Color color, String rutaIcono) {
         JButton boton = new JButton(texto);
-        boton.setFont(new Font("Arial", Font.BOLD, 18));
+        boton.setFont(new Font("Arial", Font.BOLD, 14));
         boton.setFocusPainted(false);
         boton.setToolTipText(tooltip);
-
-        // Color de fondo transparente
-        final Color colorTransparente = new Color(60, 60, 60, 150); // Translúcido
-        boton.setBackground(colorTransparente);
-        boton.setOpaque(true); // Hacer el fondo opaco pero con transparencia
-        boton.setForeground(Color.WHITE); // Texto en blanco
-        boton.setBorder(BorderFactory.createLineBorder(new Color(100, 100, 100), 2, true)); // Borde visible
+        boton.setBackground(color);
+        boton.setForeground(Color.WHITE);
+        boton.setPreferredSize(new Dimension(200, 30));
+        boton.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255), 1, true));
         boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        // Desactivar efectos visuales al pasar el ratón por encima
-        boton.setRolloverEnabled(false); // Desactiva el efecto de rollover
-        boton.addChangeListener(e -> {
+        // Asignar ícono al botón
+        if (rutaIcono != null) {
+            ImageIcon icono = new ImageIcon(rutaIcono);
+            boton.setIcon(new ImageIcon(icono.getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH)));
+            boton.setHorizontalTextPosition(SwingConstants.RIGHT);
+        }
 
-            // Mantener siempre el color y transparencia original
-            if (!boton.getModel().isPressed() && !boton.getModel().isRollover()) {
-                boton.setBackground(colorTransparente);
+        // Agregar efecto de hover
+        boton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                boton.setBackground(color.darker());
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                boton.setBackground(color);
             }
         });
 
-        // Desactivar efectos predeterminados de clic
-        boton.setContentAreaFilled(false);
-        boton.setFocusPainted(false);
-
         return boton;
+    }
+
+    // Método para abrir una nueva vista
+    private void abrirVista(JFrame vista) {
+        vista.setVisible(true);
     }
 
     // Clase personalizada para pintar una imagen de fondo
