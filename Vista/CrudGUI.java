@@ -6,23 +6,16 @@ import java.io.File;
 
 public class CrudGUI extends JFrame {
 
-    public static void main(String[] args) {
-       
-        CrudGUI interfaz = new CrudGUI();
-       
-        //Configuracion de la ventana principal
-        interfaz.setTitle("Menú Principal");
-        interfaz.setSize(800, 600);
-        interfaz.setBackground(Color.WHITE);
-        interfaz.setResizable(false);
-        interfaz.setVisible(true);
-        interfaz.setLocationRelativeTo(null);
-        interfaz.setDefaultCloseOperation(EXIT_ON_CLOSE); 
-         
-    }
-
-
     public CrudGUI() {
+
+        //Configuracion de la ventana principal
+        setTitle("Menú Principal");
+        setSize(800, 600);
+        setBackground(Color.WHITE);
+        setResizable(false);
+        setVisible(true);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE); 
 
         // Ruta de la imagen de fondo
         String rutaImagen = "imagenes/fondo2.jpg";
