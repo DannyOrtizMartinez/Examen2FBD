@@ -40,7 +40,7 @@ public class ActualizarVista extends JFrame {
         // Crea etiquetas y campos de texto
         JLabel labelBuscar = crearEtiqueta("Buscar por ID:");
         JTextField txtBuscar = crearCampoTexto("Ingrese el ID del registro que desea actualizar.");
-        JButton btnBuscar = crearBoton("Buscar", "Haga clic para buscar el registro.", "imagen/lupa.png",
+        JButton btnBuscar = crearBoton("Buscar", "Haga clic para buscar el registro.", "imagenes/lupa.png",
                 new Color(100, 149, 237), Color.WHITE); // Azul claro
 
         JLabel labelPrimerNombre = crearEtiqueta("Primer Nombre:");
@@ -56,11 +56,11 @@ public class ActualizarVista extends JFrame {
         JTextField txtSegundoApellido = crearCampoTexto("Ingrese el nuevo segundo apellido (opcional).");
 
         // Crear botón de actualización
-        JButton btnActualizar = crearBoton("Actualizar", "Haga clic para actualizar los datos.", "imagen/lapiz2.png",
+        JButton btnActualizar = crearBoton("Actualizar", "Haga clic para actualizar los datos.", "imagenes/lapiz2.png",
                 new Color(60, 179, 113), Color.WHITE); // Verde
 
         // Crear botón regresar
-        JButton btnRegresar = crearBoton("Regresar", "Regresa al menú principal.", "imagen/salir.png",
+        JButton btnRegresar = crearBoton("Regresar", "Regresa al menú principal.", "imagenes/salir.png",
                 new Color(255, 69, 0), Color.WHITE); // Naranja
 
         // Acción para el botón "Buscar"
@@ -96,7 +96,7 @@ public class ActualizarVista extends JFrame {
         // Acción para el botón "Regresar"
         btnRegresar.addActionListener(e -> {
             this.dispose(); // Cierra esta ventana
-            new GUI(); // Abre la ventana principal
+            new CrudGUI(); // Abre la ventana principal
         });
 
         // Posicionar componentes

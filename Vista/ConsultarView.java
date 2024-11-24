@@ -42,7 +42,7 @@ public class ConsultarView extends JFrame {
         JTextField txtBuscar = crearCampoTexto("Ingrese el ID del registro que desea consultar.");
 
         // Botón de búsqueda
-        JButton btnBuscar = crearBoton("Buscar", "Haga clic para buscar el registro.", "imagen/lupa.png",
+        JButton btnBuscar = crearBoton("Buscar", "Haga clic para buscar el registro.", "imagenes/lupa.png",
                 new Color(100, 149, 237), Color.WHITE); // Azul claro
 
         JTextArea areaResultados = new JTextArea(10, 30);
@@ -63,13 +63,13 @@ public class ConsultarView extends JFrame {
         });
 
         // Crear botón regresar
-        JButton btnRegresar = crearBoton("Regresar", "Regresa al menú principal.", "imagen/salir.png",
+        JButton btnRegresar = crearBoton("Regresar", "Regresa al menú principal.", "imagenes/salir.png",
                 new Color(255, 69, 0), Color.WHITE); // Naranja
 
         // Acción para el botón "Regresar"
         btnRegresar.addActionListener(e -> {
             this.dispose(); // Cierra esta ventana
-            new GUI(); // Abre la ventana principal
+            new CrudGUI(); // Abre la ventana principal
         });
 
         // Posicionar componentes

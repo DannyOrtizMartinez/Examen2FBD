@@ -94,7 +94,7 @@ public class InsertarVista extends JFrame {
         panelPrincipal.add(txtSegundoApellido, gbc);
 
         // Crear botones estilizados
-        JButton btnInsertar = crearBoton("Insertar", "Haga clic para insertar los datos.", "imagen/insertar2.png",
+        JButton btnInsertar = crearBoton("Insertar", "Haga clic para insertar los datos.", "imagenes/insertar2.png",
                 new Color(60, 179, 113), Color.WHITE); // Verde con texto blanco
         btnInsertar.addActionListener(e -> {
             // Acción para insertar los datos
@@ -108,12 +108,12 @@ public class InsertarVista extends JFrame {
             JOptionPane.showMessageDialog(this, mensaje, "Datos Insertados", JOptionPane.INFORMATION_MESSAGE);
         });
 
-        JButton btnRegresar = crearBoton("Regresar", "Regresa al menú principal.", "imagen/salir.png",
+        JButton btnRegresar = crearBoton("Regresar", "Regresa al menú principal.", "imagenes/salir.png",
                 new Color(30, 144, 255), Color.WHITE); // Azul con texto blanco
         btnRegresar.addActionListener(e -> {
             // Acción para regresar a la ventana principal
             this.dispose(); // Cierra esta ventana
-            new GUI(); // Abre la ventana principal
+            new CrudGUI(); // Abre la ventana principal
         });
 
         // Posicionar botones a la derecha

@@ -4,12 +4,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-public class GUI extends JFrame {
+public class CrudGUI extends JFrame {
 
-    public GUI() {
+    public static void main(String[] args) {
+       
+        CrudGUI interfaz = new CrudGUI();
+       
+        //Configuracion de la ventana principal
+        interfaz.setTitle("Menú Principal");
+        interfaz.setSize(800, 600);
+        interfaz.setBackground(Color.WHITE);
+        interfaz.setResizable(false);
+        interfaz.setVisible(true);
+        interfaz.setLocationRelativeTo(null);
+        interfaz.setDefaultCloseOperation(EXIT_ON_CLOSE); 
+         
+    }
+
+
+    public CrudGUI() {
 
         // Ruta de la imagen de fondo
-        String rutaImagen = "imagen/fondo2.jpg";
+        String rutaImagen = "imagenes/fondo2.jpg";
 
         // Verifica que la imagen existe
         if (!new File(rutaImagen).exists()) {
@@ -40,14 +56,14 @@ public class GUI extends JFrame {
 
         // Creación botones con íconos
         JButton btnIngresar = crearBoton("INSERTAR", "Registra nuevos datos en el sistema.", new Color(153, 102, 255),
-                "imagen/insertar2.png");
+                "imagenes/insertar2.png");
         JButton btnConsultar = crearBoton("CONSULTAR", "Consulta los datos existentes.", new Color(255, 153, 102),
-                "imagen/lupa.png");
+                "imagenes/lupa.png");
         JButton btnActualizar = crearBoton("ACTUALIZAR", "Actualiza los datos en el sistema.", new Color(255, 204, 102),
-                "imagen/lapiz2.png");
+                "imagenes/lapiz2.png");
         JButton btnEliminar = crearBoton("ELIMINAR", "Elimina datos del sistema.", new Color(255, 102, 102),
-                "imagen/eliminarIcon.png");
-        JButton btnSalir = crearBoton("SALIR", "Cierra la aplicación.", new Color(102, 178, 255), "imagen/salir.png");
+                "imagenes/eliminarIcon.png");
+        JButton btnSalir = crearBoton("SALIR", "Cierra la aplicación.", new Color(102, 178, 255), "imagenes/salir.png");
 
         // Agrega acciones a los botones
         btnIngresar.addActionListener(e -> abrirVista(new InsertarVista()));

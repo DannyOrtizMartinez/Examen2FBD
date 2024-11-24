@@ -42,7 +42,7 @@ public class EliminarVista extends JFrame {
         JTextField txtIdUsuario = crearCampoTexto("Ingrese el ID del usuario que desea eliminar.");
 
         // Botón de eliminar
-        JButton btnEliminar = crearBoton("Eliminar", "Haga clic para eliminar el usuario.", "imagen/eliminarIcon.png",
+        JButton btnEliminar = crearBoton("Eliminar", "Haga clic para eliminar el usuario.", "imagenes/eliminarIcon.png",
                 new Color(220, 53, 69), Color.WHITE); // Rojo para resaltar la acción
 
         // Acción para el botón "Eliminar"
@@ -59,13 +59,13 @@ public class EliminarVista extends JFrame {
         });
 
         // Botón regresar
-        JButton btnRegresar = crearBoton("Regresar", "Regresa al menú principal.", "imagen/salir.png",
+        JButton btnRegresar = crearBoton("Regresar", "Regresa al menú principal.", "imagenes/salir.png",
                 new Color(255, 165, 0), Color.WHITE); // Naranja
 
         // Acción para el botón "Regresar"
         btnRegresar.addActionListener(e -> {
             this.dispose(); // Cierra esta ventana
-            new GUI(); // Abre la ventana principal
+            new CrudGUI(); // Abre la ventana principal
         });
 
         // Posicionar componentes
