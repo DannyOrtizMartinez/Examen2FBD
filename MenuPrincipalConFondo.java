@@ -7,6 +7,7 @@ import java.io.File;
 public class MenuPrincipalConFondo extends JFrame {
 
     public MenuPrincipalConFondo() {
+
         // Configuración de la ventana principal
         setTitle("Menú Principal");
         setSize(600, 400);
@@ -88,6 +89,7 @@ public class MenuPrincipalConFondo extends JFrame {
         // Desactivar efectos visuales al pasar el ratón por encima
         boton.setRolloverEnabled(false); // Desactiva el efecto de rollover
         boton.addChangeListener(e -> {
+            
             // Mantener siempre el color y transparencia original
             if (!boton.getModel().isPressed() && !boton.getModel().isRollover()) {
                 boton.setBackground(colorTransparente);
